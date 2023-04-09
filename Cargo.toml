@@ -1,0 +1,22 @@
+[package]
+name = "microtex-sys"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+libc = "0.2"
+
+[lib]
+name = "microtex_sys"
+path = "src/lib.rs"
+
+[[bin]]
+name = "tex2png"
+path = "src/tex2png.rs"
+
+[build-dependencies]
+cmake = "0.1"
+cc = "1.0"
+pkg-config = "0.3.26"
