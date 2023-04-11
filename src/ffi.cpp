@@ -18,10 +18,17 @@ extern "C" void *ffi_render_tex(char *code_ptr, size_t code_len, uint32_t pixel_
 {
     std::string code(code_ptr, code_len);
     std::wstring wide_code = tex::utf82wide(code);
-    auto render = tex::LaTeX::parse(wide_code, pixel_width, text_size, line_space, fg_color);
-    *width = render->getWidth();
-    *height = render->getHeight();
-    return render;
+    try
+    {
+        auto render = tex::LaTeX::parse(wide_code, pixel_width, text_size, line_space, fg_color);
+        *width = render->getWidth();
+        *height = render->getHeight();
+        return render;
+    }
+    catch (std::exception &e)
+    {
+        return nullptr;
+    }
 }
 
 extern "C" void ffi_render_to_raster(void *raw_render, uint32_t padding, uint8_t *image_ptr, uint32_t bg_color)

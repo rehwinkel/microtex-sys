@@ -65,7 +65,7 @@ impl LaTeX {
         padding: u32,
         fg_color: u32,
         bg_color: u32,
-    ) -> ImageData {
+    ) -> Option<ImageData> {
         let mut width: u32 = 0;
         let mut height: u32 = 0;
         let render = unsafe {
@@ -80,6 +80,9 @@ impl LaTeX {
                 &mut height,
             )
         };
+        if render.is_null() {
+            return None;
+        }
         width += padding * 2;
         height += padding * 2;
         let mut image: Vec<u8> = Vec::with_capacity((width * height) as usize * 4);
@@ -87,11 +90,11 @@ impl LaTeX {
             image.set_len((width * height) as usize * 4);
             ffi_render_to_raster(render, padding, image.as_mut_ptr(), bg_color);
         }
-        ImageData {
+        Some(ImageData {
             pixels: image,
             width,
             height,
-        }
+        })
     }
 }
 
