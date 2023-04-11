@@ -1,11 +1,13 @@
 #include <iostream>
 #include <cstring>
 #include <latex.h>
+#include <pangomm/init.h>
 #include <cairomm/cairomm.h>
 #include <platform/cairo/graphic_cairo.h>
 
 extern "C" void ffi_init_tex()
 {
+    Pango::init();
     tex::LaTeX::init();
 }
 
