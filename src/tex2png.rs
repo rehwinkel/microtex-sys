@@ -4,7 +4,7 @@ use microtex_sys::LaTeX;
 
 fn main() {
     let tex = LaTeX::init();
-    let mut image_data = tex.render_to_png("d", 0, 50.0, 10.0, 10, 0xFFFF0000, 0xFF0000FF);
+    let mut image_data = tex.render_latex("d", 0, 50.0, 10.0, 10, 0xFFFF0000, 0xFF0000FF);
     image_data.bgra_to_rgba();
     let path = Path::new("test_image.png");
     let file = File::create(path).unwrap();

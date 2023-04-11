@@ -56,7 +56,7 @@ impl LaTeX {
     /**
      * Colors must be supplied in ARGB format.
      */
-    pub fn render_to_png(
+    pub fn render_latex(
         &self,
         code: &str,
         pixel_width: u32,
